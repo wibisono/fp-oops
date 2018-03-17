@@ -1,22 +1,14 @@
 options:
 
-  #############################
-  # Exercises                 #
-  #############################
+  - title: Notes 
+    url: docs/notes.html
+
+  - title: Highlights 
+    url: docs/highlights.html
 
   - title: Exercises 
     url: docs/exercises.html
 
-  ###########################
-  # Notes #
-  ###########################
+  - title: Snippets 
+    url: docs/snippets.html
 
-  - title: Notes 
-    url: docs/notes.html
-
-  ###########################
-  # Recipes                 #
-  ###########################
-
-  - title: Recipes 
-    url: docs/recipes.html
