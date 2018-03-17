@@ -1,1 +1,5 @@
 github-repo-token
+target
+project/target
+.history
+.gitignore

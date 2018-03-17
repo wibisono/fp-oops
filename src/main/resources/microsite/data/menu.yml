@@ -1,0 +1,22 @@
+options:
+
+  #############################
+  # Exercises                 #
+  #############################
+
+  - title: Exercises 
+    url: docs/exercises.html
+
+  ###########################
+  # Notes #
+  ###########################
+
+  - title: Notes 
+    url: docs/notes.html
+
+  ###########################
+  # Recipes                 #
+  ###########################
+
+  - title: Recipes 
+    url: docs/recipes.html
