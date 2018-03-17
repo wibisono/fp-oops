@@ -30,11 +30,18 @@ import cats.syntax.traverse._        // also for hosts.traverse
 import cats.syntax.functor._        // to perform .map(_.sum)
 
 class UptimeService[F[_] : Applicative]( uptimeClient : UptimeClient[F]){
-    def getTotalHostimes(hosts : List[String]) : F[Int] = 
+    def getTotalUptime(hosts : List[String]) : F[Int] = 
         hosts.traverse(uptimeClient.getUptime).map(_.sum)
 }
 
-
+def testTotalUptime() = {
+  val hosts = Map("host1" -> 10, "host2" -> 6)
+  val client = new TestUptimeClient(hosts)
+  val service = new UptimeService(client)
+  val actual = service.getTotalUptime(hosts.keys.toList) 
+  val expected = hosts.values.sum
+  assert(actual == expected)
+}
 
 ```
 {% endscalafiddle %}
