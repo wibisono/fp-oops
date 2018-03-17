@@ -1,6 +1,6 @@
 enablePlugins(MicrositesPlugin)
 micrositeName := "FP-oops"
-micrositeDescription := "Learning FP from OOP in Scala"
+micrositeDescription := "Learning FP with a hint of OOP in Scala"
 
 micrositeBaseUrl := "fp-oops"
 
