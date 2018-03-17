@@ -22,11 +22,18 @@
 </span><span class="k">import</span> <span class="nn">cats.syntax.functor._</span>        <span class="c1">// to perform .map(_.sum)
 </span>
 <span class="k">class</span> <span class="nc">UptimeService</span><span class="o">[</span><span class="kt">F</span><span class="o">[</span><span class="k">_</span><span class="o">]</span> <span class="kt">:</span> <span class="kt">Applicative</span><span class="o">](</span> <span class="n">uptimeClient</span> <span class="k">:</span> <span class="kt">UptimeClient</span><span class="o">[</span><span class="kt">F</span><span class="o">]){</span>
-    <span class="k">def</span> <span class="n">getTotalHostimes</span><span class="o">(</span><span class="n">hosts</span> <span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> 
+    <span class="k">def</span> <span class="n">getTotalUptime</span><span class="o">(</span><span class="n">hosts</span> <span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">String</span><span class="o">])</span> <span class="k">:</span> <span class="kt">F</span><span class="o">[</span><span class="kt">Int</span><span class="o">]</span> <span class="k">=</span> 
         <span class="n">hosts</span><span class="o">.</span><span class="n">traverse</span><span class="o">(</span><span class="n">uptimeClient</span><span class="o">.</span><span class="n">getUptime</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">sum</span><span class="o">)</span>
 <span class="o">}</span>
 
-
+<span class="k">def</span> <span class="n">testTotalUptime</span><span class="o">()</span> <span class="k">=</span> <span class="o">{</span>
+  <span class="k">val</span> <span class="n">hosts</span> <span class="k">=</span> <span class="nc">Map</span><span class="o">(</span><span class="s">"host1"</span> <span class="o">-&gt;</span> <span class="mi">10</span><span class="o">,</span> <span class="s">"host2"</span> <span class="o">-&gt;</span> <span class="mi">6</span><span class="o">)</span>
+  <span class="k">val</span> <span class="n">client</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">TestUptimeClient</span><span class="o">(</span><span class="n">hosts</span><span class="o">)</span>
+  <span class="k">val</span> <span class="n">service</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">UptimeService</span><span class="o">(</span><span class="n">client</span><span class="o">)</span>
+  <span class="k">val</span> <span class="n">actual</span> <span class="k">=</span> <span class="n">service</span><span class="o">.</span><span class="n">getTotalUptime</span><span class="o">(</span><span class="n">hosts</span><span class="o">.</span><span class="n">keys</span><span class="o">.</span><span class="n">toList</span><span class="o">)</span> 
+  <span class="k">val</span> <span class="n">expected</span> <span class="k">=</span> <span class="n">hosts</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">sum</span>
+  <span class="n">assert</span><span class="o">(</span><span class="n">actual</span> <span class="o">==</span> <span class="n">expected</span><span class="o">)</span>
+<span class="o">}</span>
 
 </code></pre></div></div>
 </div>
