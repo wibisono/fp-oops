@@ -8,6 +8,14 @@ options:
 
   - title: Exercises 
     url: docs/exercises.html
+    menu_section: exercises
+
+    nested_options:
+      - title: Scala with Cats
+        url: docs/exercises/scala-with-cats.html 
+
+      - title: The Red book 
+        url: docs/exercises/red-book.html 
 
   - title: Snippets 
     url: docs/snippets.html
