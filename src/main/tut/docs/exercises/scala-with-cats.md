@@ -33,7 +33,7 @@ title: Scala with Cats
 
     <div role="tabpanel" class="tab-pane" id="learn"> <h3>Fiddle around!</h3>
 
-        {% scalafiddle %}
+        {% scalafiddle template="ShowResult" %}
 
         trait UptimeClient[F[_]] {
             def getUptime(host : String) : F[Int]
@@ -71,7 +71,8 @@ title: Scala with Cats
     </div>
 
     <div role="tabpanel" class="tab-pane" id="solution"> <h3>Solution</h3>
-         {% scalafiddle %}
+
+        {% scalafiddle template="ShowResult" %}
 
         trait UptimeClient[F[_]] {
             def getUptime(host : String) : F[Int]

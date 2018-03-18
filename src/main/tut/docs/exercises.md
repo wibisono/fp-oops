@@ -32,7 +32,7 @@ Example of exercise is as follows:
 
     <div role="tabpanel" class="tab-pane" id="learn"> <h3>Fiddle around!</h3>
 
-        {% scalafiddle %}
+        {% scalafiddle template="ShowResult" %}
         def sum(a: Int, b: Int) = ??? 
 
         assert(sum(2,2) == 4)
@@ -42,7 +42,7 @@ Example of exercise is as follows:
 
     <div role="tabpanel" class="tab-pane" id="solution"> <h3>Solution</h3>
         
-        {% scalafiddle %}
+        {% scalafiddle template="ShowResult" %}
         def sum(a: Int, b: Int) = a + b 
 
         assert(sum(2,2) == 4)
