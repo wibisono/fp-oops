@@ -18,4 +18,8 @@ options:
  
   - title: Snippets 
     url: docs/snippets.html
+    nested_options:
+      - title: Speaking Creature 
+        url: docs/snippets/speaking-creature.html 
+
 
