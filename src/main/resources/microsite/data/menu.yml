@@ -3,12 +3,8 @@ options:
   - title: Notes 
     url: docs/notes.html
 
-  - title: Highlights 
-    url: docs/highlights.html
-
   - title: Exercises 
     url: docs/exercises.html
-    menu_section: exercises
 
     nested_options:
       - title: Scala with Cats
@@ -17,6 +13,9 @@ options:
       - title: The Red book 
         url: docs/exercises/red-book.html 
 
+  - title: Highlights 
+    url: docs/highlights.html
+ 
   - title: Snippets 
     url: docs/snippets.html
 

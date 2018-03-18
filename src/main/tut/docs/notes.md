@@ -1,7 +1,7 @@
 ---
 layout: docs
 title:  Notes 
-position: 2
+position: 1 
 ---
 
 Here is where notes will be
