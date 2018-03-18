@@ -1,7 +1,7 @@
 options:
 
-  - title: Notes 
-    url: docs/notes.html
+#  - title: Notes 
+#    url: docs/notes.html
 
   - title: Exercises 
     url: docs/exercises.html
@@ -13,8 +13,8 @@ options:
       - title: The Red book 
         url: docs/exercises/red-book.html 
 
-  - title: Highlights 
-    url: docs/highlights.html
+#  - title: Highlights 
+#    url: docs/highlights.html
  
   - title: Snippets 
     url: docs/snippets.html
