@@ -27,7 +27,8 @@ module Tags
             content = indentation ? super.gsub(/^#{' |\t' * indentation}/, '') : super
             content = converter.convert(content)
             content = content.strip # Strip again to avoid "\n"
-            if "Problem" == @tab
+
+            if @tab =~ /problem/i
                 '<div role="tabpanel" id="' + @tab + '" class="tab-pane active">' + content + '</div>'
             else
                 '<div role="tabpanel" id="' + @tab + '" class="tab-pane">' + content + '</div>'
