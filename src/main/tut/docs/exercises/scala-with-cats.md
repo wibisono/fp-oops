@@ -1,40 +1,36 @@
 ---
 layout: docs 
 title: Scala with Cats 
----
+--- 
 
-<ul id="problemTabs" class="nav nav-tabs">
-    <li class="active"><a class="nav-link" href="#problem" data-toggle="tab">Problem</a></li>
-    <li><a href="#learn" data-toggle="tab">Learn</a></li>
-    <li><a href="#solution" data-toggle="tab">Solution</a></li>
-</ul>
+{% tnavs problemTabs %}
+    {% tnav Problem %} Problem  {% endtnav %}
+    {% tnav Learn %} Learn  {% endtnav %}
+    {% tnav Solution  %} Solution  {% endtnav %}
+{% endtnavs %}
 
-<div class="tab-content">
+{% tabs %} 
 
-    <div role="tabpanel" class="tab-pane active" id="problem"> 
+{% tab Problem %} 
+<h3>Uptime Client Case Study</h3>
 
-        <h3>Uptime Client Case Study</h3>
+This is a case study where we wanted to illustrate defining service and clients in a generic way.
 
-        <p> 
-            This is a case study where we wanted to illustrate defining service and clients in a generic way.
+We have client who is responsible to check uptime of a host machine.
+A service will be implemented based on this client to get total uptime of all hosts.
 
-            We have client who is responsible to check uptime of a host machine.
-            A service will be implemented based on this client to get total uptime of all hosts.
+We want to implement these service with possible two interpretation, during tests we wanted this service to behave synchronously.
+When running on production we wanted them to run asynchronously, in parallel.
 
-            We want to implement these service with possible two interpretation, during tests we wanted this service to behave synchronously.
-            When running on production we wanted them to run asynchronously, in parallel.
+Learning the concept, it's better to read the book, but here, let's just exercise how to use Applicative to 
+get the uptime in parallel. Hints are in the imports.
 
-            Learning the concept, it's better to read the book, but here, let's just exercise how to use Applicative to 
-            get the uptime in parallel. Hints are in the imports.
+{% endtab %}
 
-        </p>
-
-    </div>
-
-    <div role="tabpanel" class="tab-pane" id="learn"> <h3>Fiddle around!</h3>
-
-        {% scalafiddle template="ShowResult" %}
-
+{% tab Learn %} 
+<h3>Fiddle Around!</h3>
+{% scalafiddle template="ShowResult" %}
+```scala
         trait UptimeClient[F[_]] {
             def getUptime(host : String) : F[Int]
         }
@@ -63,17 +59,19 @@ title: Scala with Cats
         val service = new UptimeService(client)
         val actual = service.getTotalUptime(hosts.keys.toList) 
         val expected = hosts.values.sum
-        assert(actual == expected)
+        actual == expected
+
+```
+{% endscalafiddle %}
 
 
-        {% endscalafiddle %}
+{% endtab %}
 
-    </div>
+{% tab Solution  %} 
+<h3>Solution</h3>
 
-    <div role="tabpanel" class="tab-pane" id="solution"> <h3>Solution</h3>
-
-        {% scalafiddle template="ShowResult" %}
-
+{% scalafiddle template="ShowResult" %}
+```scala
         trait UptimeClient[F[_]] {
             def getUptime(host : String) : F[Int]
         }
@@ -103,11 +101,11 @@ title: Scala with Cats
         val service = new UptimeService(client)
         val actual = service.getTotalUptime(hosts.keys.toList) 
         val expected = hosts.values.sum
-        assert(actual == expected)
 
-        {% endscalafiddle %}
+        actual == expected
+```
+{% endscalafiddle %}
 
-    </div>
-
-</div>
+{% endtab %}
+{% endtabs %}
 

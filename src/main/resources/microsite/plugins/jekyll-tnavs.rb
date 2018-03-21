@@ -1,18 +1,22 @@
 module TNavs 
     class TNavs < Liquid::Block
+        def initialize(tag_name, tnavs, tokens)
+            super
+            @tnavs = tnavs.strip
+        end
         def render(context)
-            '<ul class="nav nav-tabs">' + super + '</ul>'
+            '<ul id="'+@tnavs+'" class="nav nav-tabs">' + super + '</ul>'
         end
     end 
 
     class TNav < Liquid::Block
-        def initialize(tag_name, tab, tokens)
+        def initialize(tag_name, tnav, tokens)
             super
-            @tab = tab.strip
+            @tnav = tnav.strip
         end
 
         def render(context)
-            return "" if @tab.empty?
+            return "" if @tnav.empty?
 
             site      = context.registers[:site]
             converter = site.find_converter_instance(Jekyll::Converters::Markdown)
@@ -28,10 +32,10 @@ module TNavs
             content = converter.convert(content)
             content = content.strip # Strip again to avoid "\n"
 
-            if "Problem" == @tab
-                '<li class="active"> <a href="#' + @tab + '" data-toggle="tab">' + content + '</a></li>'
+            if "Problem" == @tnav
+                '<li class="active"> <a class="nav-link" href="#' + @tnav + '" data-toggle="tab">' + content + '</a></li>'
             else
-                '<li> <a href="#' + @tab + '" data-toggle="tab">' + content + '</a></li>'
+                '<li> <a class="nav-link" href="#' + @tnav + '" data-toggle="tab">' + content + '</a></li>'
             end    
         end
     end

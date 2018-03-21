@@ -15,7 +15,7 @@ It will be formatted using the following template :
 
 Example of exercise is as follows: 
 
-{% tnavs %}
+{% tnavs problemTabs %}
     {% tnav Problem %} Problem  {% endtnav %}
     {% tnav Learn %} Learn  {% endtnav %}
     {% tnav Solution  %} Solution  {% endtnav %}
