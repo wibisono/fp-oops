@@ -15,40 +15,43 @@ It will be formatted using the following template :
 
 Example of exercise is as follows: 
 
-<ul id="problemTabs" class="nav nav-tabs">
-    <li class="active"><a class="nav-link" href="#problem" data-toggle="tab">Problem</a></li>
-    <li><a href="#learn" data-toggle="tab">Learn</a></li>
-    <li><a href="#solution" data-toggle="tab">Solution</a></li>
-</ul>
+{% tnavs %}
+    {% tnav Problem %} Problem  {% endtnav %}
+    {% tnav Learn %} Learn  {% endtnav %}
+    {% tnav Solution  %} Solution  {% endtnav %}
+{% endtnavs %}
 
-<div class="tab-content">
+{% tabs %}
+{% tab Problem %} 
+<h3>The two Numbers</h3>
+   This is an advance exercise to solve addition
+{% endtab %}
 
-    <div role="tabpanel" class="tab-pane active" id="problem"> 
+{% tab Learn %} 
+<h3>Fiddle Around!</h3>
 
-        <h3>The Two Numbers</h3>
-        <p> This is an advanced exercise to add two integers </p>
+{% scalafiddle template="ShowResult" %}
+```scala
+def sum(a: Int, b: Int) = ??? 
 
-    </div>
+sum(2, 2) == 4
 
-    <div role="tabpanel" class="tab-pane" id="learn"> <h3>Fiddle around!</h3>
+```
+{% endscalafiddle %}
 
-        {% scalafiddle template="ShowResult" %}
-        def sum(a: Int, b: Int) = ??? 
+{% endtab %}
 
-        assert(sum(2,2) == 4)
-        {% endscalafiddle %}
+{% tab Solution  %} 
+<h3>Solution</h3>
 
-    </div>
+{% scalafiddle template="ShowResult" %}
+```scala
+def sum(a: Int, b: Int) = a+b 
 
-    <div role="tabpanel" class="tab-pane" id="solution"> <h3>Solution</h3>
-        
-        {% scalafiddle template="ShowResult" %}
-        def sum(a: Int, b: Int) = a + b 
+sum(2, 2) == 4
+```
+{% endscalafiddle %}
 
-        assert(sum(2,2) == 4)
-        {% endscalafiddle %}
 
-    </div>
-
-</div>
-
+{% endtab %}
+{% endtabs %}
