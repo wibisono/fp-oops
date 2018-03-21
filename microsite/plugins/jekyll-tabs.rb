@@ -1,7 +1,7 @@
 module Tags
     class TabsBlock < Liquid::Block
         def render(context)
-            '<div class="tab-content">' + super + "</div>"
+            '<div class="tab-content">' + super + '</div>'
         end
     end 
 
@@ -27,8 +27,11 @@ module Tags
             content = indentation ? super.gsub(/^#{' |\t' * indentation}/, '') : super
             content = converter.convert(content)
             content = content.strip # Strip again to avoid "\n"
-
-            '<div role="tabpanel" id="' + @tab + '" class="tab-pane">' + content + "</div>"
+            if "Problem" == @tab
+                '<div role="tabpanel" id="' + @tab + '" class="tab-pane active">' + content + '</div>'
+            else
+                '<div role="tabpanel" id="' + @tab + '" class="tab-pane">' + content + '</div>'
+            end 
         end
     end 
  end 

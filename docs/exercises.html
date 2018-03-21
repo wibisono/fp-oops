@@ -11,51 +11,35 @@
 
 <p>Example of exercise is as follows:</p>
 
-<ul id="problemTabs" class="nav nav-tabs">
-    <li class="active"><a class="nav-link" href="#problem" data-toggle="tab">Problem</a></li>
-    <li><a href="#learn" data-toggle="tab">Learn</a></li>
-    <li><a href="#solution" data-toggle="tab">Solution</a></li>
+<ul class="nav nav-tabs">
+    <li class="active"> <a href="#Problem" data-toggle="tab"><p>Problem</p></a></li>
+    <li> <a href="#Learn" data-toggle="tab"><p>Learn</p></a></li>
+    <li> <a href="#Solution" data-toggle="tab"><p>Solution</p></a></li>
 </ul>
 
 <div class="tab-content">
+<div role="tabpanel" id="Problem" class="tab-pane active"><h3>The two Numbers</h3>
+<p>This is an advance exercise to solve addition</p></div>
 
-    <div role="tabpanel" class="tab-pane active" id="problem"> 
+<div role="tabpanel" id="Learn" class="tab-pane"><h3>Fiddle Around!</h3>
 
-        <h3>The Two Numbers</h3>
-        <p> This is an advanced exercise to add two integers </p>
+<div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">???</span> 
 
-    </div>
+<span class="n">sum</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">==</span> <span class="mi">4</span>
 
-    <div role="tabpanel" class="tab-pane" id="learn"> <h3>Fiddle around!</h3>
-
-        <div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    def sum(a: Int, b: Int) = ??? 
-
-    assert(sum(2,2) == 4)
-    "Yay! you solved it"
 </code></pre></div></div>
+</div></div>
 
-</div>
+<div role="tabpanel" id="Solution" class="tab-pane"><h3>Solution</h3>
 
+<div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span> 
 
-    </div>
-
-    <div role="tabpanel" class="tab-pane" id="solution"> <h3>Solution</h3>
-        
-        <div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    def sum(a: Int, b: Int) = a + b 
-
-    assert(sum(2,2) == 4)
-    "Yay! you solved it"
+<span class="n">sum</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">==</span> <span class="mi">4</span>
 </code></pre></div></div>
-
+</div></div>
 </div>
-
-
-    </div>
-
-</div>
-
 </section></div></div></div></div><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="/fp-oops/highlight/highlight.pack.js"></script><script>hljs.configure({
 languages:['scala','java','bash']
 });

@@ -1,7 +1,7 @@
-module Tags
+module TNavs 
     class TNavs < Liquid::Block
         def render(context)
-            '<ul class="nav nav-tabs">' + super + "</ul>"
+            '<ul class="nav nav-tabs">' + super + '</ul>'
         end
     end 
 
@@ -28,12 +28,16 @@ module Tags
             content = converter.convert(content)
             content = content.strip # Strip again to avoid "\n"
 
-            '<li> <a href="#' + @tab + '" data-toggle="tab">' + content + "</a></li>"
+            if "Problem" == @tab
+                '<li class="active"> <a href="#' + @tab + '" data-toggle="tab">' + content + '</a></li>'
+            else
+                '<li> <a href="#' + @tab + '" data-toggle="tab">' + content + '</a></li>'
+            end    
         end
     end
 
  end 
 
-Liquid::Template.register_tag("tnavs", Tags::TNavs)
-Liquid::Template.register_tag("tnav",  Tags::TNav)
+Liquid::Template.register_tag("tnavs", TNavs::TNavs)
+Liquid::Template.register_tag("tnav",  TNavs::TNav)
 
