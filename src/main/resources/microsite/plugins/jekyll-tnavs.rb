@@ -32,7 +32,7 @@ module TNavs
             content = converter.convert(content)
             content = content.strip # Strip again to avoid "\n"
 
-            if "Problem" == @tnav
+            if @tnav =~ /problem/i
                 '<li class="active"> <a class="nav-link" href="#' + @tnav + '" data-toggle="tab">' + content + '</a></li>'
             else
                 '<li> <a class="nav-link" href="#' + @tnav + '" data-toggle="tab">' + content + '</a></li>'
