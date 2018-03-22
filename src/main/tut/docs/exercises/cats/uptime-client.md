@@ -1,4 +1,11 @@
+---
+layout: docs 
+title: Uptime Client 
+--- 
+
 <h2>Uptime Client</h2>
+
+This is the first case study from [Scala with Cats](https://underscore.io/books/scala-with-cats/)
 
 We have uptime clients, responsible to check uptime of a host.
 A service will be implemented based on this client to get total uptime of all hosts.
@@ -33,48 +40,48 @@ the synchronous version correctly.
 {% scalafiddle template="ShowResult" %}
 ```scala
 
-        // F[_] is container of result that we will decide later.
-        trait UptimeClient[F[_]] {
-            def getUptime(host : String) : F[Int]
-        }
+// F[_] is container of result that we will decide later.
+trait UptimeClient[F[_]] {
+    def getUptime(host : String) : F[Int]
+}
 
 
-        // Real client will be using future, not part of this exercise, 
-        // but you can come up with something yourself
-        import scala.concurrent.Future
-        class RealUptimeClient extends UptimeClient[Future] {
-            def getUptime(host : String) : Future[Int] = ???
-        }
+// Real client will be using future, not part of this exercise, 
+// but you can come up with something yourself
+import scala.concurrent.Future
+class RealUptimeClient extends UptimeClient[Future] {
+    def getUptime(host : String) : Future[Int] = ???
+}
 
-        // For testing we assume client is parameterised with map of host and uptimes 
-        // Implement this function, getting 0 uptime if host is not in the key
-        import cats.Id
-        class TestUptimeClient( uptimes : Map[String, Int] ) extends UptimeClient[Id] {
-            def getUptime(host : String) : Id[Int] = ??? 
-        }
+// For testing we assume client is parameterised with map of host and uptimes 
+// Implement this function, getting 0 uptime if host is not in the key
+import cats.Id
+class TestUptimeClient( uptimes : Map[String, Int] ) extends UptimeClient[Id] {
+    def getUptime(host : String) : Id[Int] = ??? 
+}
 
-        import cats.Applicative             // so we can constraint that F[_] will be Applicative
-        import cats.instances.list._        // we are going to treat our list of host names as Applicative, we need instances
-        import cats.syntax.traverse._       // we will perform traverse of uptime clients 
-        import cats.syntax.functor._        // once we get a list of uptimes, we want to get total and treat this as Functor
+import cats.Applicative             // so we can constraint that F[_] will be Applicative
+import cats.instances.list._        // we are going to treat our list of host names as Applicative, we need instances
+import cats.syntax.traverse._       // we will perform traverse of uptime clients 
+import cats.syntax.functor._        // once we get a list of uptimes, we want to get total and treat this as Functor
 
-        // Observing those imports and signature of this function, try to implement it. 
-        class UptimeService[F[_] : Applicative]( uptimeClient : UptimeClient[F]){
-            def getTotalUptime(hosts : List[String]) : F[Int] = ???
-        }
+// Observing those imports and signature of this function, try to implement it. 
+class UptimeService[F[_] : Applicative]( uptimeClient : UptimeClient[F]){
+    def getTotalUptime(hosts : List[String]) : F[Int] = ???
+}
 
-        // Feel free to add test for the RealUptimeClient depending on how you implement it
-        // Here are the check for the synchronous version
-        val hosts = Map("host1" -> 10, "host2" -> 6)
-        val client = new TestUptimeClient(hosts)
-        val service = new UptimeService(client)
+// Feel free to add test for the RealUptimeClient depending on how you implement it
+// Here are the check for the synchronous version
+val hosts = Map("host1" -> 10, "host2" -> 6)
+val client = new TestUptimeClient(hosts)
+val service = new UptimeService(client)
 
-        // Once you're done implementing this will produce expected result
-        import scala.util._
-        val actual = Try(service.getTotalUptime(hosts.keys.toList))
-        val expected = Success(hosts.values.sum)
+// Once you're done implementing this will produce expected result
+import scala.util._
+val actual = Try(service.getTotalUptime(hosts.keys.toList))
+val expected = Success(hosts.values.sum)
 
-        actual == expected
+actual == expected
 
 ```
 {% endscalafiddle %}
@@ -85,43 +92,44 @@ the synchronous version correctly.
 {% tab Solution  %} 
 
 {% scalafiddle template="ShowResult" %}
-```scala
-        trait UptimeClient[F[_]] {
-            def getUptime(host : String) : F[Int]
-        }
+```scala 
 
-        import scala.concurrent.Future
-        class RealUptimeClient extends UptimeClient[Future] {
-            def getUptime(host : String) : Future[Int] = ???
-        }
+trait UptimeClient[F[_]] {
+    def getUptime(host : String) : F[Int]
+}
 
-        import cats.Id
-        class TestUptimeClient( uptimes : Map[String, Int] ) extends UptimeClient[Id] {
-            def getUptime(host : String) : Id[Int] = uptimes.get(host).getOrElse(0) 
-        }
+import scala.concurrent.Future
+class RealUptimeClient extends UptimeClient[Future] {
+    def getUptime(host : String) : Future[Int] = ???
+}
 
-        import cats.Applicative             // so we can constraint that F[_] will be Applicative
-        import cats.instances.list._        // we are going to treat our list of host names as Applicative, we need instances
-        import cats.syntax.traverse._       // we will perform traverse of uptime clients 
-        import cats.syntax.functor._        // once we get a list of uptimes, we want to get total and treat this as Functor
+import cats.Id
+class TestUptimeClient( uptimes : Map[String, Int] ) extends UptimeClient[Id] {
+    def getUptime(host : String) : Id[Int] = uptimes.get(host).getOrElse(0) 
+}
 
-        // Observing those imports and signature of this function, try to implement it. 
-        class UptimeService[F[_] : Applicative]( uptimeClient : UptimeClient[F]){
-            def getTotalUptime(hosts : List[String]) : F[Int] = hosts.traverse(uptimeClient.getUptime).map(_.sum)
-        }
+import cats.Applicative             // so we can constraint that F[_] will be Applicative
+import cats.instances.list._        // we are going to treat our list of host names as Applicative, we need instances
+import cats.syntax.traverse._       // we will perform traverse of uptime clients 
+import cats.syntax.functor._        // once we get a list of uptimes, we want to get total and treat this as Functor
 
-        // Feel free to add test for the RealUptimeClient depending on how you implement it
-        // Here are the check for the synchronous version
-        val hosts = Map("host1" -> 10, "host2" -> 6)
-        val client = new TestUptimeClient(hosts)
-        val service = new UptimeService(client)
+// Observing those imports and signature of this function, try to implement it. 
+class UptimeService[F[_] : Applicative]( uptimeClient : UptimeClient[F]){
+    def getTotalUptime(hosts : List[String]) : F[Int] = hosts.traverse(uptimeClient.getUptime).map(_.sum)
+}
 
-        // Once you're done implementing this will produce expected result
-        import scala.util._
-        val actual = Try(service.getTotalUptime(hosts.keys.toList))
-        val expected = Success(hosts.values.sum)
+// Feel free to add test for the RealUptimeClient depending on how you implement it
+// Here are the check for the synchronous version
+val hosts = Map("host1" -> 10, "host2" -> 6)
+val client = new TestUptimeClient(hosts)
+val service = new UptimeService(client)
 
-        actual == expected
+// Once you're done implementing this will produce expected result
+import scala.util._
+val actual = Try(service.getTotalUptime(hosts.keys.toList))
+val expected = Success(hosts.values.sum)
+
+actual == expected
 
 ```
 {% endscalafiddle %}

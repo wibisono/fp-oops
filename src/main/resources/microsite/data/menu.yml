@@ -1,25 +1,24 @@
 options:
 
-  - title: Notes 
-    url: docs/notes.html
-
   - title: Exercises 
     url: docs/exercises.html
 
     nested_options:
-      - title: Scala with Cats
-        url: docs/exercises/scala-with-cats.html 
+      - title: Uptime Client 
+        url: docs/exercises/cats/uptime-client.html 
 
-      - title: The Red book 
-        url: docs/exercises/red-book.html 
+      - title: Map Reduce 
+        url: docs/exercises/cats/map-reduce/map-reduce.html 
 
-  - title: Highlights 
-    url: docs/highlights.html
- 
   - title: Snippets 
     url: docs/snippets.html
     nested_options:
       - title: Speaking Creature 
         url: docs/snippets/speaking-creature.html 
 
+  - title: Notes 
+    url: docs/notes.html
+
+  - title: Highlights 
+    url: docs/highlights.html
 

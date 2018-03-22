@@ -31,10 +31,14 @@ Example of exercise is as follows:
 <h3>Fiddle Around!</h3>
 
 {% scalafiddle template="ShowResult" %}
-```scala
+```scala 
+
+// Please solve this advanced exercise
 def sum(a: Int, b: Int) = ??? 
 
-sum(2, 2) == 4
+import scala.util._ 
+
+Try(sum(2, 3)) == Success(6)
 
 ```
 {% endscalafiddle %}
@@ -45,7 +49,8 @@ sum(2, 2) == 4
 <h3>Solution</h3>
 
 {% scalafiddle template="ShowResult" %}
-```scala
+```scala 
+
 def sum(a: Int, b: Int) = a+b 
 
 sum(2, 2) == 4
