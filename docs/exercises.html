@@ -26,7 +26,9 @@
 <div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
 <div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">???</span> 
 
-<span class="n">sum</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">==</span> <span class="mi">4</span>
+<span class="k">import</span> <span class="nn">scala.util._</span> 
+
+<span class="nc">Try</span><span class="o">(</span><span class="n">sum</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">2</span><span class="o">))</span> <span class="o">==</span> <span class="nc">Success</span><span class="o">(</span><span class="mi">4</span><span class="o">)</span>
 
 </code></pre></div></div>
 </div></div>
