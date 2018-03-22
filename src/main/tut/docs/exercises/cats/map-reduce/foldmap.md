@@ -78,6 +78,7 @@ def foldMap[A, B: Monoid](values: Vector[A])(func: A => B): B = {
     }
 }
 
+import cats.instances.int._
 foldMap(Vector("Count","Total","Length","Of","String"))(_.length) == 24
 
 ```

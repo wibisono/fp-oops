@@ -1,7 +1,7 @@
 ---
 layout: docs
 title: Exercises 
-position: 2
+position: 1 
 ---
 
 <h2> Exercises </h2>
