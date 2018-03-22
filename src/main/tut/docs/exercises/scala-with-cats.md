@@ -8,3 +8,5 @@ title: Scala with Cats
 {% include_relative cats/map-reduce.md %}
 
 
+
+

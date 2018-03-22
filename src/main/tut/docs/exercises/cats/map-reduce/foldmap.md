@@ -23,8 +23,11 @@ import cats.instances.vector._
 import cats.instances.int._
 
 def foldMap[A, B: Monoid](values: Vector[A])(func: A => B): B = ???
-    
-foldMap(Vector(1,2,3))( x=>x*10) == 60
+
+import scala.util._    
+
+Try(foldMap(Vector(1,2,3))( x=>x*10)) == Success(60)
+
 ```
 {% endscalafiddle %}
 
