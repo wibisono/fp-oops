@@ -8,7 +8,8 @@ module Tags
     class TabBlock < Liquid::Block
         def initialize(tag_name, tab, tokens)
             super
-            @tab = tab.strip
+            (@tab, rest) = tab.strip.split(/\s+/)
+            @active = rest != nil && rest.include?('active')
         end
 
         def render(context)
@@ -28,7 +29,7 @@ module Tags
             content = converter.convert(content)
             content = content.strip # Strip again to avoid "\n"
 
-            if @tab =~ /problem/i
+            if @active
                 '<div role="tabpanel" id="' + @tab + '" class="tab-pane active">' + content + '</div>'
             else
                 '<div role="tabpanel" id="' + @tab + '" class="tab-pane">' + content + '</div>'
