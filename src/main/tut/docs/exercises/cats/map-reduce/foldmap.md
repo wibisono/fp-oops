@@ -23,10 +23,14 @@ Here is the signature of foldmap.
 def foldMap[A, B: Monoid](values: Vector[A])(func: A => B): B = ???
 ```
 What's with the `B : Monoid` syntax ? 
-- It is a [context bound](https://docs.scala-lang.org/tutorials/FAQ/context-bounds.html).
+- It is a [context bound](https://docs.scala-lang.org/tutorials/FAQ/context-bounds.html), another way of saying  
+
+```scala 
+def foldMap[A, B](implicit mB : Monoid[B])(values: Vector[A])(func: A => B): B = ???
+```
 
 What it means to you as implementor of the function ?
-- You can safely assume, user of this function will provide a way so you can treat B as monoid.
+- You can safely assume (or require that) in this context an implicit instance of Monoid[B] will be provided.
 
 Why would you want to treat B as monoid ?
 - Because as the story goes above, you are going to combine B's and start with empty B. Combine and empty is the defining characteristic of a Monoid
