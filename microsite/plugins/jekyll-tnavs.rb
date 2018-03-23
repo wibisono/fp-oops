@@ -12,7 +12,8 @@ module TNavs
     class TNav < Liquid::Block
         def initialize(tag_name, tnav, tokens)
             super
-            @tnav = tnav.strip
+            (@tnav, rest) = tnav.strip.split(/\s+/)
+            @active = rest != nil && rest.include?('active')
         end
 
         def render(context)
@@ -32,7 +33,7 @@ module TNavs
             content = converter.convert(content)
             content = content.strip # Strip again to avoid "\n"
 
-            if @tnav =~ /problem/i
+            if @active
                 '<li class="active"> <a class="nav-link" href="#' + @tnav + '" data-toggle="tab">' + content + '</a></li>'
             else
                 '<li> <a class="nav-link" href="#' + @tnav + '" data-toggle="tab">' + content + '</a></li>'
