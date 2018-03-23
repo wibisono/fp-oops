@@ -1,12 +1,18 @@
+---
+layout: docs 
+title: Fold Map 
+--- 
+
+
 {% tnavs problemTabs %}
-    {% tnav problem-id-1 %} Problem {% endtnav %}
-    {% tnav foldmap-id %} Fiddle! {% endtnav %}
-    {% tnav solution-id  %} Solution  {% endtnav %}
+    {% tnav p-foldmap-id active %} Problem {% endtnav %}
+    {% tnav f-foldmap-id %} Fiddle! {% endtnav %}
+    {% tnav s-foldmap-id  %} Solution  {% endtnav %}
 {% endtnavs %}
 
 {% tabs %} 
 
-{% tab problem-id-1 %} 
+{% tab p-foldmap-id active %} 
 
 <h3>Defining Fold Map</h3>
 
@@ -42,7 +48,7 @@ Say what ?
 
 {% endtab %}
 
-{% tab foldmap-id %} 
+{% tab f-foldmap-id %} 
 
 <h3>Fiddle Around!</h3>
 
@@ -68,7 +74,7 @@ Try(foldMap(Vector("Count","Total","Length","Of","String"))(_.length)) == Succes
 
 {% endtab %}
 
-{% tab solution-id  %} 
+{% tab s-foldmap-id  %} 
 
 {% scalafiddle template="ShowResult" %}
 

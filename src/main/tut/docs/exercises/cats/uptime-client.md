@@ -5,7 +5,7 @@ title: Uptime Client
 
 <h2>Uptime Client</h2>
 
-This is the first case study from [Scala with Cats](https://underscore.io/books/scala-with-cats/)
+This is the first case study from [Scala with Cats](https://underscore.io/books/scala-with-cats/ "Available for free to download!"). 
 
 We have uptime clients, responsible to check uptime of a host.
 A service will be implemented based on this client to get total uptime of all hosts.
@@ -16,14 +16,14 @@ The constraint in this exercise :
 * We only want to implement the service once.
 
 {% tnavs problemTabs %}
-    {% tnav Problem %} Problem  {% endtnav %}
-    {% tnav Learn %} Fiddle!{% endtnav %}
-    {% tnav Solution  %} Solution  {% endtnav %}
+    {% tnav p-uptime-id active %} Problem  {% endtnav %}
+    {% tnav f-uptime-id %} Fiddle!         {% endtnav %}
+    {% tnav s-uptime-id %} Solution        {% endtnav %}
 {% endtnavs %}
 
 {% tabs %} 
 
-{% tab Problem %} 
+{% tab p-uptime-id active %} 
 <br>
 
 UptimeClient trait is provided, with a type constructor that allow us to decide later,
@@ -36,7 +36,7 @@ the synchronous version correctly.
 
 {% endtab %}
 
-{% tab Learn %} 
+{% tab f-uptime-id %} 
 {% scalafiddle template="ShowResult" %}
 ```scala
 
@@ -89,7 +89,7 @@ actual == expected
 
 {% endtab %}
 
-{% tab Solution  %} 
+{% tab s-uptime-id %} 
 
 {% scalafiddle template="ShowResult" %}
 ```scala 

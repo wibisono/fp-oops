@@ -16,18 +16,18 @@ It will be formatted using the following template :
 Example of exercise is as follows: 
 
 {% tnavs problemTabs %}
-    {% tnav Problem %} Problem  {% endtnav %}
-    {% tnav Learn %} Learn  {% endtnav %}
-    {% tnav Solution  %} Solution  {% endtnav %}
+    {% tnav problem-id active %} Problem  {% endtnav %}
+    {% tnav learn-id %} Learn  {% endtnav %}
+    {% tnav solution-id %} Solution  {% endtnav %}
 {% endtnavs %}
 
 {% tabs %}
-{% tab Problem %} 
+{% tab problem-id %} 
 <h3>The two Numbers</h3>
    This is an advance exercise to solve addition
 {% endtab %}
 
-{% tab Learn %} 
+{% tab learn-id %} 
 <h3>Fiddle Around!</h3>
 
 {% scalafiddle template="ShowResult" %}
@@ -38,14 +38,14 @@ def sum(a: Int, b: Int) = ???
 
 import scala.util._ 
 
-Try(sum(2, 3)) == Success(6)
+Try(sum(2, 4)) == Success(6)
 
 ```
 {% endscalafiddle %}
 
 {% endtab %}
 
-{% tab Solution  %} 
+{% tab solution-id %} 
 <h3>Solution</h3>
 
 {% scalafiddle template="ShowResult" %}
@@ -53,7 +53,7 @@ Try(sum(2, 3)) == Success(6)
 
 def sum(a: Int, b: Int) = a+b 
 
-sum(2, 2) == 4
+sum(2, 4) == 6 
 ```
 {% endscalafiddle %}
 
