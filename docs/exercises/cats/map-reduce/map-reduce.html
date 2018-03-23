@@ -31,12 +31,15 @@
 </code></pre></div></div>
 <p>What’s with the <code class="highlighter-rouge">B : Monoid</code> syntax ?</p>
 <ul>
-  <li>It is a <a href="https://docs.scala-lang.org/tutorials/FAQ/context-bounds.html">context bound</a>.</li>
+  <li>It is a <a href="https://docs.scala-lang.org/tutorials/FAQ/context-bounds.html">context bound</a>, another way of saying</li>
 </ul>
+
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">def</span> <span class="n">foldMap</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">B</span><span class="o">](</span><span class="k">implicit</span> <span class="n">mB</span> <span class="k">:</span> <span class="kt">Monoid</span><span class="o">[</span><span class="kt">B</span><span class="o">])(</span><span class="n">values</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">[</span><span class="kt">A</span><span class="o">])(</span><span class="n">func</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">B</span> <span class="o">=</span> <span class="o">???</span>
+</code></pre></div></div>
 
 <p>What it means to you as implementor of the function ?</p>
 <ul>
-  <li>You can safely assume, user of this function will provide a way so you can treat B as monoid.</li>
+  <li>You can safely assume (or require that) in this context an implicit instance of Monoid[B] will be provided.</li>
 </ul>
 
 <p>Why would you want to treat B as monoid ?</p>
