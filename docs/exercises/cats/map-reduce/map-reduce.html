@@ -2,8 +2,17 @@
 
 <p>This is the second case study from <a href="https://underscore.io/books/scala-with-cats/" title="Available for free to download!">Scala with Cats</a>.</p>
 
-<p>Learning about Monoid, Functors, and other goodies.</p>
+<p>Learning about Monoid, Functors, Fold and other goodies.  As you might have heard, map reduce is a technique to deal with data with two processing stages.</p>
 
+<p>First, data is going through a mapping stage, which would transform each element of the big data.
+Secondly result of this transformation is reduced to get the final result.</p>
+
+<p>In <a href="https://underscore.io/books/scala-with-cats/" title="Available
+for free to download!">Scala with Cats</a> the first stage is discussed in Functor chapter 3,
+mappable things.  The reduce stage is more familiarly known as fold also
+discussed in Foldable and Traverse chapter 7.</p>
+
+<p>We will approach the problem also in stages:</p>
 <ul>
   <li><a href="foldmap">Fold Map</a>, our first stab at the problem.</li>
   <li><a href="par-foldmap">Parallel Fold Map</a>, make it faster!</li>

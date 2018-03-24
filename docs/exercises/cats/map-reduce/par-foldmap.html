@@ -2,33 +2,43 @@
     <li class="active"> <a class="nav-link" href="#p-parfoldmap-id" data-toggle="tab"><p>Problem</p></a></li>
     <li> <a class="nav-link" href="#f-parfoldmap-id" data-toggle="tab"><p>Fiddle!</p></a></li>
     <li> <a class="nav-link" href="#s-parfoldmap-id" data-toggle="tab"><p>Solution</p></a></li>
+    <li> <a class="nav-link" href="#s-catfoldmap-id" data-toggle="tab"><p>Cats!</p></a></li>
 </ul>
 
 <div class="tab-content"> 
 
 <div role="tabpanel" id="p-parfoldmap-id" class="tab-pane active"><h3>Parallel Fold Map</h3>
 
-<p>We are going to parallelize previous <a href="foldmap">Fold Map</a> implementation.
-How ? Lets say you know number of processors you have, and you want to split the job into batches.</p>
+<p>We are going to parallelize result of our previous exercise, synchronous <a href="foldmap">Fold Map</a> implementation. 
+If you haven’t done it, I suggested that you take a stab at that first exercise.</p>
 
-<p>Some helpful functions</p>
+<p>How ? Lets say you know number of processors you have, and you want to split the job into batches.</p>
+
+<p>The required processing involve the following steps:</p>
+<ul>
+  <li>We need to know number of available processor you have on your machine</li>
+  <li>We need to distribute evenly our input data as batch to each processor we have</li>
+  <li>We need to perform transformation on each batch using our existing <a href="foldmap">foldmap</a> implementation</li>
+  <li>We need to collect the result by performing a final reduce step from the result.</li>
+</ul>
+
+<p>Some helper pre processing steps :</p>
+
 <div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Getting number of processor available :
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Getting number of processor available, unfortunately fiddling in JS we only have one of this
 </span><span class="k">val</span> <span class="n">nProcessors</span> <span class="k">=</span>  <span class="nc">Runtime</span><span class="o">.</span><span class="n">getRuntime</span><span class="o">.</span><span class="n">availableProcessors</span>
 
 <span class="c1">// Splitting existing vector to groups with size 3 
-</span>
-<span class="n">println</span><span class="o">((</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">10</span><span class="o">).</span><span class="n">toList</span><span class="o">.</span><span class="n">grouped</span><span class="o">(</span><span class="mi">3</span><span class="o">).</span><span class="n">toList</span><span class="o">)</span>
+</span><span class="k">val</span> <span class="n">batches</span> <span class="k">=</span> <span class="o">(</span><span class="mi">1</span> <span class="n">to</span> <span class="mi">10</span><span class="o">).</span><span class="n">toList</span><span class="o">.</span><span class="n">grouped</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span>
  
-<span class="n">nProcessors</span>
+<span class="n">s</span><span class="s">"""$nProcessors\nBatches:\n${batches.mkString("\n")}"""</span>
 </code></pre></div></div>
-</div></div>
+</div></div> 
 
 <div role="tabpanel" id="f-parfoldmap-id" class="tab-pane"><h3>Fiddle Around!</h3>
 
 <div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0" data-minheight="600px">
-<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-<span class="k">import</span> <span class="nn">cats.Monoid</span>
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="nn">cats.Monoid</span>
 <span class="k">import</span> <span class="nn">cats.Applicative</span>             
 <span class="k">import</span> <span class="nn">cats.syntax.traverse._</span>       
 
@@ -52,8 +62,11 @@ How ? Lets say you know number of processors you have, and you want to split the
         <span class="k">val</span> <span class="n">monoidB</span> <span class="k">=</span> <span class="n">implicitly</span><span class="o">[</span><span class="kt">Monoid</span><span class="o">[</span><span class="kt">B</span><span class="o">]]</span>
         <span class="k">val</span> <span class="n">nProcessors</span> <span class="k">=</span>  <span class="nc">Runtime</span><span class="o">.</span><span class="n">getRuntime</span><span class="o">.</span><span class="n">availableProcessors</span>
         <span class="k">val</span> <span class="n">batchSize</span>   <span class="k">=</span>  <span class="o">(</span><span class="n">values</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">)/</span><span class="n">nProcessors</span> <span class="o">+</span> <span class="mi">1</span>
-        <span class="c1">// Process values per batch size, make use of grouped 
-</span>        <span class="c1">// values ...
+        <span class="c1">//Split the values in batches 
+</span>
+        <span class="c1">//Pass the batches to previous foldmap 
+</span>
+        <span class="c1">//Collect the result
 </span>        <span class="o">???</span>
       <span class="o">}</span>
 
@@ -61,7 +74,9 @@ How ? Lets say you know number of processors you have, and you want to split the
 <span class="c1">// Debug 
 </span><span class="k">import</span> <span class="nn">scala.util._</span> 
 
-<span class="nc">Try</span><span class="o">(</span><span class="n">parallelFoldMap</span><span class="o">(</span><span class="nc">Vector</span><span class="o">(</span><span class="s">"Count"</span><span class="o">,</span><span class="s">"Total"</span><span class="o">,</span><span class="s">"Length"</span><span class="o">,</span><span class="s">"Of"</span><span class="o">,</span><span class="s">"String"</span><span class="o">))(</span><span class="k">_</span><span class="o">.</span><span class="n">length</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">println</span><span class="o">))</span>
+<span class="k">val</span> <span class="n">actual</span> <span class="k">=</span> <span class="n">parallelFoldMap</span><span class="o">(</span><span class="nc">Vector</span><span class="o">(</span><span class="s">"Count"</span><span class="o">,</span><span class="s">"Total"</span><span class="o">,</span><span class="s">"Length"</span><span class="o">,</span><span class="s">"Of"</span><span class="o">,</span><span class="s">"String"</span><span class="o">))(</span><span class="k">_</span><span class="o">.</span><span class="n">length</span><span class="o">)</span>
+
+<span class="n">assertEventually</span><span class="o">(</span><span class="mi">24</span><span class="o">,</span> <span class="n">actual</span><span class="o">)</span>
 
 </code></pre></div></div>
 </div></div>
@@ -93,15 +108,64 @@ How ? Lets say you know number of processors you have, and you want to split the
         <span class="k">val</span> <span class="n">nProcessors</span> <span class="k">=</span>  <span class="nc">Runtime</span><span class="o">.</span><span class="n">getRuntime</span><span class="o">.</span><span class="n">availableProcessors</span>
         <span class="k">val</span> <span class="n">batchSize</span>   <span class="k">=</span>  <span class="o">(</span><span class="n">values</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">)/</span><span class="n">nProcessors</span> <span class="o">+</span> <span class="mi">1</span>
 
-        <span class="n">values</span><span class="o">.</span><span class="n">grouped</span><span class="o">(</span><span class="n">batchSize</span><span class="o">).</span><span class="n">toList</span>
-        <span class="o">.</span><span class="n">traverse</span><span class="o">(</span><span class="n">batch</span> <span class="k">=&gt;</span> <span class="nc">Future</span><span class="o">(</span><span class="n">foldMap</span><span class="o">(</span><span class="n">batch</span><span class="o">)(</span><span class="n">func</span><span class="o">)))</span>
-        <span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">reduce</span> <span class="k">=&gt;</span> <span class="n">foldMap</span><span class="o">(</span><span class="n">reduce</span><span class="o">.</span><span class="n">toVector</span><span class="o">)(</span><span class="n">identity</span><span class="o">))</span>
+        <span class="c1">//Split the values in batches 
+</span>        <span class="n">values</span><span class="o">.</span><span class="n">grouped</span><span class="o">(</span><span class="n">batchSize</span><span class="o">).</span><span class="n">toList</span>
+        <span class="c1">//Pass the batches to previous foldmap 
+</span>        <span class="o">.</span><span class="n">traverse</span><span class="o">(</span><span class="n">batch</span> <span class="k">=&gt;</span> <span class="nc">Future</span><span class="o">(</span><span class="n">foldMap</span><span class="o">(</span><span class="n">batch</span><span class="o">)(</span><span class="n">func</span><span class="o">)))</span>
+        <span class="c1">//Collect the result
+</span>        <span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="n">reduce</span> <span class="k">=&gt;</span> <span class="n">foldMap</span><span class="o">(</span><span class="n">reduce</span><span class="o">.</span><span class="n">toVector</span><span class="o">)(</span><span class="n">identity</span><span class="o">))</span>
       <span class="o">}</span>
 
 <span class="c1">// Debug 
 </span>
 <span class="n">parallelFoldMap</span><span class="o">(</span><span class="nc">Vector</span><span class="o">(</span><span class="s">"Count"</span><span class="o">,</span><span class="s">"Total"</span><span class="o">,</span><span class="s">"Length"</span><span class="o">,</span><span class="s">"Of"</span><span class="o">,</span><span class="s">"String"</span><span class="o">))(</span><span class="k">_</span><span class="o">.</span><span class="n">length</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">println</span><span class="o">)</span>
 
+</code></pre></div></div>
+</div></div>
+
+
+<div role="tabpanel" id="s-catfoldmap-id" class="tab-pane"><p><br /></p>
+
+<p>This is the same solution, implemented with more power of the kittens.</p>
+
+<p>Instead of reducing using previous foldmap and identity, we are using foldable and combineall.</p>
+
+<div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">import</span> <span class="nn">cats.Monoid</span>
+     
+<span class="k">import</span> <span class="nn">cats.syntax.traverse._</span>       
+<span class="k">import</span> <span class="nn">cats.syntax.semigroup._</span>
+<span class="k">import</span> <span class="nn">cats.syntax.foldable._</span>
+
+<span class="k">import</span> <span class="nn">cats.instances.int._</span>
+<span class="k">import</span> <span class="nn">cats.instances.vector._</span>        
+<span class="k">import</span> <span class="nn">cats.instances.future._</span>
+
+<span class="k">import</span> <span class="nn">scala.concurrent.Future</span> 
+<span class="k">import</span> <span class="nn">scala.concurrent.ExecutionContext.Implicits.global</span>
+
+<span class="k">def</span> <span class="n">foldMap</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">B:</span> <span class="kt">Monoid</span><span class="o">](</span><span class="n">values</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">[</span><span class="kt">A</span><span class="o">])(</span><span class="n">func</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">B</span> <span class="o">=</span> <span class="o">{</span>
+    <span class="n">values</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="nc">Monoid</span><span class="o">[</span><span class="kt">B</span><span class="o">].</span><span class="n">empty</span><span class="o">)(</span><span class="k">_</span> <span class="o">|+|</span> <span class="n">func</span><span class="o">(</span><span class="k">_</span><span class="o">))</span>
+<span class="o">}</span>
+
+<span class="k">def</span> <span class="n">parallelFoldMap</span><span class="o">[</span><span class="kt">A</span>, <span class="kt">B</span> <span class="kt">:</span> <span class="kt">Monoid</span><span class="o">]</span>
+      <span class="o">(</span><span class="n">values</span><span class="k">:</span> <span class="kt">Vector</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span>
+      <span class="o">(</span><span class="n">func</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=&gt;</span> <span class="n">B</span><span class="o">)</span><span class="k">:</span> <span class="kt">Future</span><span class="o">[</span><span class="kt">B</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+        <span class="k">val</span> <span class="n">nProcessors</span> <span class="k">=</span>  <span class="nc">Runtime</span><span class="o">.</span><span class="n">getRuntime</span><span class="o">.</span><span class="n">availableProcessors</span>
+        <span class="k">val</span> <span class="n">batchSize</span>   <span class="k">=</span>  <span class="o">(</span><span class="n">values</span><span class="o">.</span><span class="n">size</span><span class="o">-</span><span class="mi">1</span><span class="o">)/</span><span class="n">nProcessors</span> <span class="o">+</span> <span class="mi">1</span>
+
+        <span class="c1">//Split the values in batches 
+</span>        <span class="n">values</span><span class="o">.</span><span class="n">grouped</span><span class="o">(</span><span class="n">batchSize</span><span class="o">).</span><span class="n">toVector</span>
+        <span class="c1">//Pass the batches to previous foldmap 
+</span>        <span class="o">.</span><span class="n">traverse</span><span class="o">(</span><span class="n">batch</span> <span class="k">=&gt;</span> <span class="nc">Future</span><span class="o">(</span><span class="n">foldMap</span><span class="o">(</span><span class="n">batch</span><span class="o">)(</span><span class="n">func</span><span class="o">)))</span>
+        <span class="c1">//Collect the result
+</span>        <span class="o">.</span><span class="n">map</span><span class="o">(</span><span class="k">_</span><span class="o">.</span><span class="n">combineAll</span><span class="o">)</span>
+      <span class="o">}</span>
+
+<span class="c1">// Debug 
+</span>
+<span class="n">parallelFoldMap</span><span class="o">(</span><span class="nc">Vector</span><span class="o">(</span><span class="s">"Count"</span><span class="o">,</span><span class="s">"Total"</span><span class="o">,</span><span class="s">"Length"</span><span class="o">,</span><span class="s">"Of"</span><span class="o">,</span><span class="s">"String"</span><span class="o">))(</span><span class="k">_</span><span class="o">.</span><span class="n">length</span><span class="o">).</span><span class="n">map</span><span class="o">(</span><span class="n">println</span><span class="o">)</span>
 </code></pre></div></div>
 </div></div>
 </div>
@@ -113,6 +177,12 @@ hljs.initHighlighting();
 room: 'wibisono/fp-oops'};</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js"></script><script src="/fp-oops/js/main.js"></script>
 <script>
   window.scalaFiddleTemplates = {
+
+    'ShowResult': {
+      pre: 'val result = {\n',
+      post: '}\nprintln(result)\n'
+    }
+,
 
     'ShowResult': {
       pre: 'val result = {\n',
