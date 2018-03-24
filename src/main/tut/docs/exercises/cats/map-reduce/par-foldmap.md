@@ -86,9 +86,7 @@ def parallelFoldMap[A, B : Monoid]
 // Debug 
 import scala.util._ 
 
-val actual = parallelFoldMap(Vector("Count","Total","Length","Of","String"))(_.length)
-
-assertEventually(24, actual)
+val actual = parallelFoldMap(Vector("Count","Total","Length","Of","String"))(_.length).map(println)
 
 ```
 {% endscalafiddle %}
