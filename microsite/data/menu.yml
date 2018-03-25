@@ -10,6 +10,8 @@ options:
       - title: Map Reduce 
         url: docs/exercises/cats/map-reduce/map-reduce.html 
 
+      - title: Data Validation 
+        url: docs/exercises/cats/validation/validation.html 
   - title: Snippets 
     url: docs/snippets.html
 
