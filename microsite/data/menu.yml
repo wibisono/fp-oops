@@ -1,17 +1,17 @@
 options:
 
-  - title: Exercises 
-    url: docs/exercises.html
-
+  - title: Kittens 
+    url: docs/kittens.html
     nested_options:
       - title: Uptime Client 
-        url: docs/exercises/cats/uptime-client.html 
+        url: docs/kittens/uptime-client.html 
 
       - title: Map Reduce 
-        url: docs/exercises/cats/map-reduce/map-reduce.html 
+        url: docs/kittens/map-reduce/map-reduce.html 
 
       - title: Data Validation 
-        url: docs/exercises/cats/validation/validation.html 
+        url: docs/kittens/validation/validation.html 
+
   - title: Snippets 
     url: docs/snippets.html
 
