@@ -8,58 +8,65 @@ Fractal plants, based on [Lindenmeyer](https://en.wikipedia.org/wiki/L-system) s
 {% scalafiddle minheight="600px" %}
 ```scala 
 import Math._
+import scala.annotation.tailrec
 
-case class Language(state: String,
-                    constants: String,
-                    rules: Map[Char, String],
-                    turn: Double) {
-                      
-  def next() = Language(state.map {
-                                    case c if constants.contains(c) => c.toString
-                                    case v => rules(v)
-                                  }.mkString, constants, rules, turn)
+case class Language(constants: String,
+                    rules: Map[Char, String]) {
+  def next(state: String) =  state.map {
+      case c if constants.contains(c) => c.toString
+      case v => rules(v)
+  }.mkString
 
-  def next(step : Int) :Language= if(step <=0) next() else next().next(step-1)
+  @tailrec
+  final def next(state: String, step: Int): String = if (step <= 0) {
+    next(state)
+  } else {
+    next(next(state), step - 1)
+  }
 }
 
-case class Turtle(x: Double, y: Double, dir: Double, step: Double = 50) {
-  val dx = cos(dir) * step
-  val dy = sin(dir) * step
-
-  def forward = Turtle(x + dx, y + dy, dir, step)
-  def right(angle: Double) = Turtle(x, y, dir + angle / 180.0 * PI, step)
-  def left(angle: Double)  = Turtle(x, y, dir - angle / 180.0 * PI, step)
-  def draw = Fiddle.draw.lineTo(x,y)
+case class Turtle(x: Double, y: Double, dir: Double, stepSize: Double = 50, turnAngle: Double = 25) {
+  def step(s : Double = stepSize) : Turtle = {
+    val dx = cos(dir) * s
+    val dy = sin(dir) * s
+    Turtle(x + dx, y + dy, dir, stepSize)
+  }
+  def right(angle: Double = turnAngle) = Turtle(x, y, dir + angle / 180.0 * PI, stepSize)
+  def left (angle: Double = turnAngle) = Turtle(x, y, dir - angle / 180.0 * PI, stepSize)
 }
 
-def interpret(start : Turtle, l : Language)= {
-  Fiddle.draw.strokeStyle="green"
-  Fiddle.draw.beginPath
+def interpret(start: Turtle, state: String): Seq[Turtle] = {
   var cTurtle = start
   var tStack = List[Turtle]()
-  val turtles = l.state map {
-    case 'F' => cTurtle = cTurtle.forward; cTurtle
-    case '-' => cTurtle = cTurtle.right(l.turn); cTurtle
-    case '+' => cTurtle = cTurtle.left(l.turn); cTurtle
+  state map {
+    case 'F' => cTurtle = cTurtle.step(); cTurtle
+    case '-' => cTurtle = cTurtle.right(); cTurtle
+    case '+' => cTurtle = cTurtle.left(); cTurtle
     case '[' => tStack  = cTurtle.copy() :: tStack; cTurtle
     case ']' => {
       cTurtle = tStack.head
-      tStack = tStack.tail
+      tStack  = tStack.tail
       cTurtle
     }
     case _ => cTurtle
   }
-  turtles.foreach(_.draw)
-  Fiddle.draw.stroke
 }
-
-val start = Turtle(250, 350, 0, 1).left(90)
-
 //https://en.wikipedia.org/wiki/L-system#Example_7:_Fractal_plant
-val fractalPlant = Language("X", "+-[]", Map('X' -> "F+[[X]-X]-F[-FX]+X", 'F' -> "FF"), 25)
-val language     = fractalPlant.next(6)
+val fractalPlant = Language(constants = "+-[]", 
+                            rules     = Map('X' -> "F+[[X]-X]-F[-FX]+X", 
+                                            'F' -> "FF" ))
 
-interpret(start, language)
+val plant6 = fractalPlant.next("X", 6)
+val turtle = Turtle(250, 350, 0, 1, 25).left(90)
+
+val turtles = interpret(turtle, plant6)
+
+val draw = Fiddle.draw
+draw.beginPath
+turtles foreach { turtle =>
+   draw.lineTo(turtle.x,turtle.y)
+}
+draw.stroke
 
 ```
 {% endscalafiddle %}
