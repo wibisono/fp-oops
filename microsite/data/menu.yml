@@ -1,7 +1,7 @@
 options:
 
-  - title: Kittens 
-    url: docs/kittens.html
+  - title: Exercises 
+    url: docs/exercises.html
     nested_options:
       - title: Uptime Client 
         url: docs/kittens/uptime-client.html 
@@ -17,8 +17,3 @@ options:
 
   - title: Highlights 
     url: docs/highlights.html
-
-  - title: Notes 
-    url: docs/notes.html
-
- 
