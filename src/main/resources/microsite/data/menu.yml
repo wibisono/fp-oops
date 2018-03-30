@@ -15,9 +15,10 @@ options:
   - title: Snippets 
     url: docs/snippets.html
 
-  - title: Notes 
-    url: docs/notes.html
-
   - title: Highlights 
     url: docs/highlights.html
 
+  - title: Notes 
+    url: docs/notes.html
+
+ 

@@ -63,6 +63,7 @@ val turtles = interpret(turtle, plant6)
 
 val draw = Fiddle.draw
 draw.beginPath
+draw.strokeStyle="green"
 turtles foreach { turtle =>
    draw.lineTo(turtle.x,turtle.y)
 }
