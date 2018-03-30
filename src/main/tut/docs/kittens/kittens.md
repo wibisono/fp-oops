@@ -1,7 +1,6 @@
 ---
 layout: docs
 title: Kittens 
-position: 1 
 ---
 
 <h2> Cats Case Studies </h2>
