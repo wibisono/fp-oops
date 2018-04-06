@@ -4,9 +4,22 @@ title: Exercises
 position: 1 
 ---
 
-Most of current [exercises](kittens/kittens) are from [Scala with Cats](https://underscore.io/books/scala-with-cats/ "Available for free to download!"). If you have some suggestion or ideas for exercies,  
- feel free to contribute by adding an issue, or pull requests to the [source of this site](https://github.com/wibisono/fp-oops)
+<h2> Exercises from Scala with Cats </h2>
 
+Case studies from [Scala with Cats](https://underscore.io/books/scala-with-cats/ "Available for free to download!") book. 
+
+1. [Uptime Client](kittens/uptime-client) where we exercise on applicative, and building service once, that can be instantiated differently in the end as asynchronous `Future` or synchronous test. 
+2. [Map Reduce](kittens/map-reduce/map-reduce) where we will learn step by step to build map reduce in scala. This contains multiple exercises
+3. [Data Validation](kittens/validation/validation) where we will build validation library based on cats.
+
+<h2> Exercises from the Red Book </h2>
+
+Interesting exercises from [The Red Book](https://www.manning.com/books/functional-programming-in-scala)
+
+1. [Monoid](redbook/monoid) 
+
+
+<h2> Exercise Format </h2>
 Exercises will be formatted using the following template :
 - A problem description, including source of exercise, where I found it on the net or in a book.
 - A learning ground to fiddle around with solution, there will be assertions to check correctness.
@@ -58,4 +71,5 @@ sum(2, 4) == 6
 
 {% endtab %}
 {% endtabs %}
+
 
