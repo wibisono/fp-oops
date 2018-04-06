@@ -12,8 +12,20 @@ options:
       - title: Data Validation 
         url: docs/kittens/validation/validation.html 
 
+      - title: Monoid 
+        url: docs/redbook/monoid.html 
+
   - title: Snippets 
     url: docs/snippets.html
+    nested_options:
+      - title: Fractal-plant 
+        url: docs/snippets/fractal-plant.html 
+
+      - title: Sierpinski
+        url: docs/snippets/sierpinski.html 
+
+      - title: Speaking Creature 
+        url: docs/snippets/speaking-creature.html 
 
   - title: Highlights 
     url: docs/highlights.html
