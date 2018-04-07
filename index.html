@@ -15,9 +15,74 @@ Learning, fiddling around and making notes along the way.  In the course of this
 
 <p>Exercises, snippets, and highlights are presented using <a href="http://scalafiddle.io">ScalaFiddle</a> so you can fiddle around without having to setup libraries needed.<br />
 If you have suggestions, corrections, ideas for exercises, feel free to create an <a href="https://github.com/wibisono/fp-oops/issues">issue</a> or made a <a href="https://github.com/wibisono/fp-oops/pulls">pull request</a>.</p>
+
+<h2> Exercise Format </h2>
+<p>Exercises will be formatted using the following template :</p>
+<ul>
+  <li>A problem description, including source of exercise, where I found it on the net or in a book.</li>
+  <li>A learning ground to fiddle around with solution, there will be assertions to check correctness.</li>
+  <li>A solution, either from the book, or whatever I could come up with so far.</li>
+</ul>
+
+<p>Example of exercise is as follows:</p>
+
+<ul id="problemTabs" class="nav nav-tabs">
+    <li class="active"> <a class="nav-link" href="#problem-id" data-toggle="tab"><p>Problem</p></a></li>
+    <li> <a class="nav-link" href="#learn-id" data-toggle="tab"><p>Learn</p></a></li>
+    <li> <a class="nav-link" href="#solution-id" data-toggle="tab"><p>Solution</p></a></li>
+</ul>
+
+<div class="tab-content">
+<div role="tabpanel" id="problem-id" class="tab-pane active"><h3>The two Numbers</h3>
+<p>This is an advance exercise to solve addition</p></div>
+
+<div role="tabpanel" id="learn-id" class="tab-pane"><h3>Fiddle Around!</h3>
+
+<div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="c1">// Please solve this advanced exercise
+</span><span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="o">???</span> 
+
+<span class="k">import</span> <span class="nn">scala.util._</span> 
+
+<span class="nc">Try</span><span class="o">(</span><span class="n">sum</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">))</span> <span class="o">==</span> <span class="nc">Success</span><span class="o">(</span><span class="mi">6</span><span class="o">)</span>
+
+</code></pre></div></div>
+</div></div>
+
+<div role="tabpanel" id="solution-id" class="tab-pane"><h3>Solution</h3>
+
+<div data-scalafiddle="" data-template="ShowResult" data-dependency="org.typelevel %%% cats-core % 1.0.1,io.circe %%% circe-core % 0.8.0,io.circe %%% circe-generic % 0.8.0,io.circe %%% circe-parser % 0.8.0">
+<div class="language-scala highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="k">def</span> <span class="n">sum</span><span class="o">(</span><span class="n">a</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">b</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span> <span class="k">=</span> <span class="n">a</span><span class="o">+</span><span class="n">b</span> 
+
+<span class="n">sum</span><span class="o">(</span><span class="mi">2</span><span class="o">,</span> <span class="mi">4</span><span class="o">)</span> <span class="o">==</span> <span class="mi">6</span> 
+</code></pre></div></div>
+</div></div>
+</div>
+
 </div></div></section><section class="technologies"><div class="container"><div class="row"></div></div></section></main><footer id="site-footer"><div class="container"><div class="row"><div class="col-xs-6"><p>FP-oops is designed and developed by <a href="" target="_blank">wibisono</a></p></div><div class="col-xs-6"><p class="text-right"><a href="https://github.com/wibisono/fp-oops"><span class="fa fa-github"></span>View on GitHub</a></p></div></div><div class="row"><div class="col-xs-6"><p>Website built with <a href="https://47deg.github.io/sbt-microsites/" target="_blank">Sbt-microsites</a> - © 2016 <a href="https://www.47deg.com/" target="_blank">47 Degrees</a></p></div></div></div></footer><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script><script src="/fp-oops/highlight/highlight.pack.js"></script><script>hljs.configure({
 languages:['scala','java','bash']
 });
 hljs.initHighlighting();
              </script><script>((window.gitter = {}).chat = {}).options = {
-room: 'wibisono/fp-oops'};</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js"></script></body></html>
+room: 'wibisono/fp-oops'};</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js"></script>
+<script>
+  window.scalaFiddleTemplates = {
+
+    'ShowResult': {
+      pre: 'val result = {\n',
+      post: '}\nprintln(result)\n'
+    }
+,
+
+    'ShowResult': {
+      pre: 'val result = {\n',
+      post: '}\nprintln(result)\n'
+    }
+
+  }
+</script>
+
+<script defer src='https://wibisono.github.io/fp-oops/integration.js'></script>
+</body></html>
