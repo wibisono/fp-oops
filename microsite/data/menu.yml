@@ -29,3 +29,11 @@ options:
 
   - title: Highlights 
     url: docs/highlights.html
+    nested_options:
+      - title: Kleisli vs Plain FP 
+        url: docs/highlights/config-kleisli.html 
+
+      - title: Make OOP great again. 
+        url: docs/highlights/expression-atm.html 
+
+
