@@ -17,3 +17,58 @@ Learning, fiddling around and making notes along the way.  In the course of this
 
 Exercises, snippets, and highlights are presented using [ScalaFiddle](http://scalafiddle.io) so you can fiddle around without having to setup libraries needed.  
 If you have suggestions, corrections, ideas for exercises, feel free to create an [issue](https://github.com/wibisono/fp-oops/issues) or made a [pull request](https://github.com/wibisono/fp-oops/pulls).
+
+<h2> Exercise Format </h2>
+Exercises will be formatted using the following template :
+- A problem description, including source of exercise, where I found it on the net or in a book.
+- A learning ground to fiddle around with solution, there will be assertions to check correctness.
+- A solution, either from the book, or whatever I could come up with so far.
+
+Example of exercise is as follows: 
+
+{% tnavs problemTabs %}
+    {% tnav problem-id active %} Problem  {% endtnav %}
+    {% tnav learn-id %} Learn  {% endtnav %}
+    {% tnav solution-id %} Solution  {% endtnav %}
+{% endtnavs %}
+
+{% tabs %}
+{% tab problem-id active %} 
+<h3>The two Numbers</h3>
+   This is an advance exercise to solve addition
+{% endtab %}
+
+{% tab learn-id %} 
+<h3>Fiddle Around!</h3>
+
+{% scalafiddle template="ShowResult" %}
+```scala 
+
+// Please solve this advanced exercise
+def sum(a: Int, b: Int) = ??? 
+
+import scala.util._ 
+
+Try(sum(2, 4)) == Success(6)
+
+```
+{% endscalafiddle %}
+
+{% endtab %}
+
+{% tab solution-id %} 
+<h3>Solution</h3>
+
+{% scalafiddle template="ShowResult" %}
+```scala 
+
+def sum(a: Int, b: Int) = a+b 
+
+sum(2, 4) == 6 
+```
+{% endscalafiddle %}
+
+{% endtab %}
+{% endtabs %}
+
+
