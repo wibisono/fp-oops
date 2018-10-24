@@ -15,6 +15,9 @@ options:
       - title: Monoid 
         url: docs/redbook/monoid.html 
 
+      - title: Geekabyte 
+        url: docs/geekabyte/easingcats.html 
+
   - title: Snippets 
     url: docs/snippets.html
     nested_options:

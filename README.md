@@ -6,6 +6,11 @@ Documenting confusion, insights, and gotchas (oops moments) while learning FP in
 
 [![Join the chat at https://gitter.im/wibisono/fp-oops](https://badges.gitter.im/wibisono/fp-oops.svg)](https://gitter.im/wibisono/fp-oops?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
+Building:
+
+Follow instruction from:
+- https://47deg.github.io/sbt-microsites/docs/build-the-microsite.html 
+
 
 NOTES 
 
