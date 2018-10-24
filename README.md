@@ -17,7 +17,7 @@ NOTES
 * Scala fiddle integration source: https://github.com/scalafiddle/scalafiddle-core/tree/master/integrations/jekyll 
 * Scala fiddle tag has to be the first thing on the line, careful when including snippets
 
-* Would be nice if I know how to setup login to github and safe the current exercises
+* Would be nice if I know how to setup login to github and save the current exercises
 * Scala fiddle seems to already support this, so in theory we also can. 
 
 * Tabs id has to match between navigation and actual tab, and make sure they are unique within page. 
